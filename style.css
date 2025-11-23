@@ -890,3 +890,40 @@ body.page-loaded {
         transition-duration: 500ms;
     }
 }
+
+/* Single-person levels: medium-width centered card on desktop */
+.single-card-level {
+    max-width: 720px;
+    /* not full page, but not tiny */
+    margin: 0 auto;
+    /* center the whole level block */
+}
+
+.single-card-level .team-grid {
+    display: flex;
+    justify-content: center;
+    /* center the card inside */
+}
+
+.single-card-level .member-card {
+    flex: 0 0 420px;
+    /* target width for the card */
+    max-width: 100%;
+}
+
+/* Keep mobile view same as before */
+@media (max-width: 900px) {
+    .single-card-level {
+        max-width: 100%;
+    }
+
+    .single-card-level .team-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .single-card-level .member-card {
+        flex: auto;
+        max-width: 100%;
+    }
+}
