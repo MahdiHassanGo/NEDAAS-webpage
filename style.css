@@ -727,3 +727,166 @@ footer span {
         font-size: 0.75rem;
     }
 }
+
+/* ---- GLOBAL ANIMATION TOKENS ---- */
+:root {
+    --deep-teal: #0b3c4a;
+    --mid-teal: #138a9c;
+    --accent-teal: #21b6c5;
+    --light-bg: #f5fcff;
+    --text-dark: #12313e;
+    --soft-gray: #e3eef3;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Page fade-in on load */
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: var(--text-dark);
+    background: radial-gradient(circle at top left, #e8faff, #f9feff);
+    scroll-behavior: smooth;
+
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 600ms var(--ease-soft), transform 600ms var(--ease-soft);
+}
+
+body.page-loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Base scroll-reveal animation (works on all viewports) */
+.animate {
+    opacity: 0;
+    transform: translateY(26px);
+    transition:
+        opacity 650ms var(--ease-soft),
+        transform 650ms var(--ease-soft);
+    will-change: opacity, transform;
+}
+
+/* Optional directional variants */
+.animate.slide-left {
+    transform: translateX(-26px);
+}
+
+.animate.slide-right {
+    transform: translateX(26px);
+}
+
+/* When visible in viewport */
+.animate.visible {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+}
+
+/* Card + button hover polish (also nice on mobile with tap) */
+.hero-card,
+.pub-card,
+.member-card,
+.contact-card,
+.about-side-card {
+    transition:
+        transform 240ms var(--ease-soft),
+        box-shadow 240ms var(--ease-soft),
+        border-color 240ms var(--ease-soft),
+        background-color 240ms var(--ease-soft);
+}
+
+.hero-card:hover,
+.pub-card:hover,
+.member-card:hover,
+.contact-card:hover,
+.about-side-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+.btn-primary,
+.btn-ghost {
+    border-radius: 999px;
+    border: none;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.35rem;
+    cursor: pointer;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    text-decoration: none;
+    transition:
+        transform 180ms var(--ease-soft),
+        box-shadow 180ms var(--ease-soft),
+        background-color 180ms var(--ease-soft),
+        border-color 180ms var(--ease-soft),
+        color 180ms var(--ease-soft);
+}
+
+.btn-primary:hover,
+.btn-ghost:hover {
+    transform: translateY(-1px) scale(1.01);
+}
+
+/* Logo “breathing” – works on mobile too */
+.brand img,
+.hero-logo {
+    transition: transform 400ms var(--ease-soft), box-shadow 400ms var(--ease-soft);
+}
+
+.brand img:hover,
+.hero-logo:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 12px 28px rgba(11, 60, 74, 0.25);
+}
+
+/* --- MOBILE NAV MENU ANIMATION --- */
+@media (max-width: 540px) {
+    nav ul {
+        position: absolute;
+        right: 1.25rem;
+        top: 100%;
+        margin-top: 0.5rem;
+        background: rgba(245, 252, 255, 0.98);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        border-radius: 12px;
+        padding: 0.6rem 0.9rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+        display: none;
+        z-index: 200;
+
+        opacity: 0;
+        transform: translateY(8px) scale(0.98);
+        transform-origin: top right;
+        transition:
+            opacity 220ms var(--ease-soft),
+            transform 220ms var(--ease-soft);
+    }
+
+    header.nav-open nav ul {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    /* Hamburger still animates as before */
+}
+
+
+/* Make animations feel softer on smaller screens */
+@media (max-width: 900px) {
+    .animate {
+        transform: translateY(20px);
+        transition-duration: 550ms;
+    }
+}
+
+@media (max-width: 540px) {
+    .animate {
+        transform: translateY(16px);
+        transition-duration: 500ms;
+    }
+}

@@ -451,7 +451,7 @@
     </footer>
 
     <script>
-        // Team grid responsiveness (your existing code)
+        // Team grid responsiveness
         function updateTeamGrid() {
             const grid = document.getElementById('teamGrid');
             if (!grid) return;
@@ -465,9 +465,6 @@
                 grid.style.gridTemplateColumns = 'repeat(3, minmax(0,1fr))';
             }
         }
-
-        window.addEventListener('resize', updateTeamGrid);
-        window.addEventListener('load', updateTeamGrid);
 
         const header = document.getElementById('site-header');
         const navLinks = document.querySelectorAll('.nav-link');
@@ -502,8 +499,45 @@
             }
         }
 
+        // === SCROLL REVEAL ANIMATIONS (desktop + mobile) ===
+        function setupScrollAnimations() {
+            const animatedEls = [
+                ...document.querySelectorAll('.hero-left, .hero-right'),
+                ...document.querySelectorAll('.about-text, .about-side-card'),
+                ...document.querySelectorAll('.pub-card'),
+                ...document.querySelectorAll('.team-level'),
+                ...document.querySelectorAll('.contact-card')
+            ];
+
+            animatedEls.forEach((el, index) => {
+                el.classList.add('animate');
+                el.style.transitionDelay = (index * 80) + 'ms'; // stagger
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15
+            });
+
+            animatedEls.forEach(el => observer.observe(el));
+        }
+
+        // === INITIALISE ===
+        window.addEventListener('load', () => {
+            document.body.classList.add('page-loaded');  // fade-in
+            updateTeamGrid();
+            onScroll();
+            setupScrollAnimations();
+        });
+
+        window.addEventListener('resize', updateTeamGrid);
         window.addEventListener('scroll', onScroll);
-        window.addEventListener('load', onScroll);
 
         // === MOBILE NAV TOGGLE ===
         if (navToggle) {
@@ -512,13 +546,25 @@
             });
         }
 
-        // Close menu when a link is clicked (on mobile)
+        // Close menu when a link is clicked (mobile)
         navLinks.forEach(link => {
             link.addEventListener('click', function () {
                 header.classList.remove('nav-open');
             });
         });
+
+
+        const animatedEls = [
+            ...document.querySelectorAll('.hero-left, .hero-right'),
+            ...document.querySelectorAll('.about-text, .about-side-card'),
+            ...document.querySelectorAll('.pub-card'),
+            ...document.querySelectorAll('.team-level'),
+            ...document.querySelectorAll('.contact-card')
+        ];
+
     </script>
+
+
 
 </body>
 
