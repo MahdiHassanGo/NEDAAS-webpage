@@ -315,7 +315,8 @@ section h2::after {
 
 .brain-img-wrap {
     position: absolute;
-    inset: 10% 8% 8% 8%;
+    inset: 10% 6% 8% 10%;
+    /* left:10%, right:6% -> moves content right */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -323,13 +324,18 @@ section h2::after {
     mix-blend-mode: screen;
 }
 
+
 .brain-img {
     max-width: 100%;
-    height: max-content;
+    max-height: 100%;
+    height: auto;
+
+    display: block;
     opacity: 0.9;
     filter: drop-shadow(0 0 18px rgba(33, 182, 197, 0.9));
     animation: brainFloat 10s ease-in-out infinite;
 }
+
 
 .brain-ring {
     position: absolute;
@@ -348,6 +354,19 @@ section h2::after {
     animation-delay: 1.4s;
     opacity: 0.8;
 }
+
+@media (max-width: 900px) {
+    .brain-img-wrap {
+        inset: 10% 6% 8% 10%;
+    }
+}
+
+@media (max-width: 480px) {
+    .brain-img-wrap {
+        inset: 7% 9% 8% 10%;
+    }
+}
+
 
 @keyframes brainFloat {
 

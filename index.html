@@ -2,16 +2,25 @@
 <html lang="en">
 
 <head>
-
-    <head>
-        <meta charset="UTF-8">
-        <title>NEDAAS – Neural Engineering, Data Analytics & Applied Science</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>NEDAAS – Neural Engineering, Data Analytics & Applied Science</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    img-src 'self' data: https:;
+    script-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline';
+    font-src 'self' data: https:;
+    connect-src 'self';
+    frame-ancestors 'self';
+    upgrade-insecure-requests;">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
 
-        <link rel="stylesheet" href="style.css">
-    </head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
 
 
 
@@ -707,7 +716,7 @@
             setupScrollAnimations();
             setupPublicationsPagination();
             attachPubPaginationHandlers();
-            initBrainCanvas();   // brain animation initialisation
+            initBrainCanvas();   // keep this here
         });
 
 
